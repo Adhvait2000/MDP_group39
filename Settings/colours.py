@@ -5,7 +5,7 @@ BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-DARK_GREEN = (0, 100, 0)
+GREEN = (0, 128, 0)
 GREY = (220, 220, 220)
 DARK_YELLOW = (236, 183, 83)
 
