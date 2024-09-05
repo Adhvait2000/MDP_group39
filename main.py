@@ -18,6 +18,8 @@ if __name__ == "__main__":
 
     obstacles_from_rules_for_task_wk89_word = [[55, 95, -90, 1], [75, 145, 180, 2], [125, 95, 0, 3], [155, 155, -90, 4], [155, 45, 180, 5]]
 
+    #wk_simulator_w_obstacles(obstacles_random)
+
     wk_simulator_w_obstacles(obstacles_from_rules_for_task_wk89_word)
     # wk_real_run(True)
 
