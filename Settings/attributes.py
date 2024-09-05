@@ -1,4 +1,4 @@
-from Setting.config import *
+from Settings.configuration import *
 
 # Attributes for the robot
 ROBOT_LENGTH = 20 * SCALING_FACTOR
