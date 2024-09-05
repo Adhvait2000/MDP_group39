@@ -13,7 +13,7 @@ class ModifiedAStar:
     def __init__(self, grid, brain, start: RobotPosition, end: RobotPosition):
         # We use a copy of the grid rather than use a reference
         # to the exact grid.
-        self.grid: Grid = grid.copy()
+        self.grid: Grid = grid.copyGrid()
         self.brain = brain
 
         self.start = start
@@ -26,18 +26,32 @@ class ModifiedAStar:
         # and that it will travel a fix distance of 10 travelling straight
         neighbours = []
 
-        # Check travel straight
-        straightDist = 10 * SCALING_FACTOR
+        # Check travel straights.
+        straight_dist = 10 * SCALING_FACTOR
         straight_commands = [
-            StraightCommand(straightDist),
-            StraightCommand(-straightDist)
+            StraightCommand(straight_dist),
+            StraightCommand(-straight_dist)
+        ]
+        for c in straight_commands:
+            # Check if doing this command does not bring us to any invalid position.
+            after, p = self.check_valid_command(c, pos)
+            if after:
+                neighbours.append((after, p, straight_dist, c))
+                
+        # Check turns
+        turn_penalty = PATH_TURN_COST
+        turn_commands = [
+            TurnCommand(90, False),  # Forward right turn
+            TurnCommand(-90, False),  # Forward left turn
+            TurnCommand(90, True),  # Reverse with wheels to right.
+            TurnCommand(-90, True),  # Reverse with wheels to left.
         ]
 
-        for c in straight_commands:
+        for c in turn_commands:
             # check if doing this command does not bring us to any invalid positions
             after, p = self.check_valid_command(c, pos)
             if after:
-                neighbours.append(after, p, turnPenalty, c)
+                neighbours.append(after, p, turn_penalty, c)
         return neighbours
     
     def check_valid_command(self, command:Command, p: RobotPosition):
@@ -51,10 +65,10 @@ class ModifiedAStar:
                 tick_command = TurnCommand(command.angle / (command.ticks // PATH_TURN_CHECK_GRANULARITY),
                                            command.rev)
                 tick_command.apply_on_pos(p_c)
-                if not (self.grid.check_valid_position(p_c) and self.grid.get_coordinate_node(*p_c.xy())):
+                if not (self.grid.check_valid_position(p_c) and self.grid.get_coordinate(*p_c.xy())):
                     return None, None
-        command.apply_on_pos(p)
-        if self.grid.check_valid_position(p) and (after := self.grid.get_coordinate_node(*p.xy())):
+        command.applyPos(p)
+        if self.grid.check_valid_position(p) and (after := self.grid.get_coordinate(*p.xy())):
             after.pos.direction = p.direction
             return after.copy(), p
         return None, None

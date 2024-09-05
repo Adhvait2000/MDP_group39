@@ -6,7 +6,7 @@ from Settings.direction import *
 from Map.position import *
 
 class Command(ABC):
-    def _init__(self, time):
+    def __init__(self, time):
         self.time = time # time in seconds in which this command is carried out
         self.ticks = math.ceil(time * FRAMES) # number of frame ticks 
         self.totalTicks = self.ticks # keep track of original total ticks
