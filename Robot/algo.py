@@ -37,7 +37,7 @@ class ModifiedAStar:
             after, p = self.check_valid_command(c, pos)
             if after:
                 neighbours.append((after, p, straight_dist, c))
-                
+
         # Check turns
         turn_penalty = PATH_TURN_COST
         turn_commands = [
@@ -51,7 +51,7 @@ class ModifiedAStar:
             # check if doing this command does not bring us to any invalid positions
             after, p = self.check_valid_command(c, pos)
             if after:
-                neighbours.append(after, p, turn_penalty, c)
+                neighbours.append((after, p, turn_penalty, c))
         return neighbours
     
     def check_valid_command(self, command:Command, p: RobotPosition):
@@ -64,7 +64,7 @@ class ModifiedAStar:
             for tick in range(command.ticks // PATH_TURN_CHECK_GRANULARITY):
                 tick_command = TurnCommand(command.angle / (command.ticks // PATH_TURN_CHECK_GRANULARITY),
                                            command.rev)
-                tick_command.apply_on_pos(p_c)
+                tick_command.applyPos(p_c)
                 if not (self.grid.check_valid_position(p_c) and self.grid.get_coordinate(*p_c.xy())):
                     return None, None
         command.applyPos(p)

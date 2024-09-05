@@ -25,7 +25,7 @@ class Command(ABC):
         pass
 
     @abstractmethod
-    def convertMessage(self):
+    def convert_to_message(self):
         # convert message to send to RPi
         pass
 
@@ -49,7 +49,7 @@ class ScanCommand(Command):
     def applyPos(self, currPos):
         pass
 
-    def convertMessage(self):
+    def convert_to_message(self):
         # just return a string of s
         return f"s{self.objIndex:04}"
     
@@ -63,7 +63,7 @@ class StraightCommand(Command):
         self.dist = dist
 
     def __str__(self):
-        return f"StraightCommand(dist={self.dist / SCALING_FACTOR}, {self.total_ticks} ticks)"
+        return f"StraightCommand(dist={self.dist / SCALING_FACTOR}, {self.totalTicks} ticks)"
 
     # By assigning __repr__ = __str__, 
     # you're telling Python that whenever __repr__ is called, \
@@ -93,7 +93,7 @@ class StraightCommand(Command):
         return self
 
 
-    def convertMessage(self):
+    def convert_to_message(self):
         #Message will be: fXXXX for forward, bXXXX for backward
         #XXXX will be the distance in decimal in centimeters
 
@@ -116,7 +116,7 @@ class TurnCommand(Command):
         self.rev = rev
 
     def __str__(self):
-        return f"TurnCommand({self.angle:.2f}degrees, {self.total_ticks} ticks, rev={self.rev})"
+        return f"TurnCommand({self.angle:.2f}degrees, {self.totalTicks} ticks, rev={self.rev})"
     
 
     __repr__ = __str__
