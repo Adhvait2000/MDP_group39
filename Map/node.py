@@ -49,6 +49,7 @@ class Node:
         pygame.draw.line(screen, GREY, (right, top), (right, bottom))  # Right border
         pygame.draw.line(screen, GREY, (left, bottom), (right, bottom))  # Bottom border
 
+
     def draw(self, screen):
         # Draw self
         self.draw_self(screen)

@@ -86,7 +86,7 @@ class Obstacle:
             rect.centerx += OBSTACLE_LENGTH / 4
 
         # Draw the picture place
-        pygame.draw.rect(screen, GREEN, rect)
+        pygame.draw.rect(screen, RED, rect)
 
     def draw_virtual_boundary(self, screen):
         # Get the boundary points
