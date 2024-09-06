@@ -67,13 +67,32 @@ class Grid:
     def drawBorders(cls, screen):
         #upper border
         # Draw upper border
-        pygame.draw.line(screen, BLACK, (0, 0), (GRID_LENGTH, 0))
-        # Draw lower border
-        pygame.draw.line(screen, BLACK, (0, GRID_LENGTH), (GRID_LENGTH, GRID_LENGTH))
-        # Draw left border
-        pygame.draw.line(screen, BLACK, (0, 0), (0, GRID_LENGTH))
-        # Draw right border
-        pygame.draw.line(screen, BLACK, (GRID_LENGTH, 0), (GRID_LENGTH, GRID_LENGTH))
+
+        # pygame.draw.line(screen, BLACK, (0, 0), (GRID_LENGTH, 0))
+        # # Draw lower border
+        # pygame.draw.line(screen, BLACK, (0, GRID_LENGTH), (GRID_LENGTH, GRID_LENGTH))
+        # # Draw left border
+        # pygame.draw.line(screen, BLACK, (0, 0), (0, GRID_LENGTH))
+        # # Draw right border
+        # pygame.draw.line(screen, BLACK, (GRID_LENGTH, 0), (GRID_LENGTH, GRID_LENGTH))
+        # Define the alternating colors
+        colors = [RED, WHITE]
+
+        # Draw upper border with alternating colors
+        for i in range(0, GRID_LENGTH, GRID_CELL_LENGTH):
+            pygame.draw.line(screen, colors[i // GRID_CELL_LENGTH % 2], (i, 0), (i + GRID_CELL_LENGTH, 0))
+
+        # Draw lower border with alternating colors
+        for i in range(0, GRID_LENGTH, GRID_CELL_LENGTH):
+            pygame.draw.line(screen, colors[i // GRID_CELL_LENGTH % 2], (i, GRID_LENGTH), (i + GRID_CELL_LENGTH, GRID_LENGTH))
+
+        # Draw left border with alternating colors
+        for i in range(0, GRID_LENGTH, GRID_CELL_LENGTH):
+            pygame.draw.line(screen, colors[i // GRID_CELL_LENGTH % 2], (0, i), (0, i + GRID_CELL_LENGTH))
+
+        # Draw right border with alternating colors
+        for i in range(0, GRID_LENGTH, GRID_CELL_LENGTH):
+            pygame.draw.line(screen, colors[i // GRID_CELL_LENGTH % 2], (GRID_LENGTH, i), (GRID_LENGTH, i + GRID_CELL_LENGTH))
 
     def drawObstacles(self, screen):
         for ob in self.obstacles:
