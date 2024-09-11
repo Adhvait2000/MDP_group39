@@ -79,7 +79,7 @@ class AlgoSimulator(AlgoApp):
 
         #Title
         font1 = pygame.font.SysFont("arial", 26)
-        text1 = font1.render("MDP Algorithm Simulator", True, WHITE)
+        text1 = font1.render("Group 39 - Algo Simulator", True, WHITE)
         text_rect1 = text1.get_rect()
         text_rect1 = 1000, 10
         self.screen.blit(text1, text_rect1)
