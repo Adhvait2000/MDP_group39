@@ -100,10 +100,10 @@ class StraightCommand(Command):
         descaled_distance = int(self.dist // SCALING_FACTOR)
         if descaled_distance < 0:
             # backward command
-            return f"b{abs(descaled_distance):04}"
+            return f"SB{abs(descaled_distance):03}"
         
         # else return forward command
-        return f"f{abs(descaled_distance):04}"
+        return f"SF{abs(descaled_distance):03}"
 
 class TurnCommand(Command):
     def __init__(self, angle, rev):
@@ -182,14 +182,14 @@ class TurnCommand(Command):
     def convert_to_message(self):
         if self.angle > 0 and not self.rev:
             # This is going forward left.
-            return "l0090"  # Note the smaller case L.
+            return "LF090"  # Note the smaller case L.
         elif self.angle > 0 and self.rev:
             # This is going backward and with the wheels to the right.
-            return "R0090"
+            return "RB090"
         elif self.angle < 0 and not self.rev:
             # This is going forward right.
-            return "r0090"
+            return "RF090"
         else:
             # This is going backward and with the wheels to the left.
-            return "L0090"
+            return "LB090"
         
