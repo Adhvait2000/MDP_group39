@@ -6,7 +6,7 @@ from rpi_server import RPiServer
 
 def main():
     # Create a server for the PC to connect to
-    server = RPiServer("192.168.13.1", 1234)
+    server = RPiServer("192.168.39.1", 1234)
     # Wait for the PC to connect to the RPi.
     print("Waiting for connection from PC...")
     try:
