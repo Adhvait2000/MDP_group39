@@ -21,8 +21,8 @@ if __name__ == "__main__":
     # wk_simulator_w_obstacles(obstacles_random)
     # wk_simulator_w_obstacles(obstacles_from_sample_arena_blackboard)
 
-    wk_simulator_w_obstacles(obstacles_from_rules_for_task_wk89_word)
-    # wk_real_run(True)
+    # wk_simulator_w_obstacles(obstacles_from_rules_for_task_wk89_word)
+    wk_real_run(True)
 
 """
     1. from simulator_mgr
