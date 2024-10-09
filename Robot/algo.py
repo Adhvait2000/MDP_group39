@@ -93,7 +93,7 @@ class ModifiedAStar:
 
         # add starting node set into the frontier
         start_node: Node = self.grid.get_coordinate(*self.start.xy()).copy()
-        start_node.direction = self.start.direction # makde the node know which direction the robot is facing
+        start_node.direction = self.start.direction # make the node know which direction the robot is facing
 
         offset = 0
         frontier.put((0, offset, (start_node, self.start)))  # Extra time parameter to tie-break same priority.
