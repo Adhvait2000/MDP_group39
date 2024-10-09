@@ -45,7 +45,7 @@ def main():
     # Send over the obstacle data to the PC.
     print("Sending obstacle data to PC...")
     # TODO: Send actual obstacle data to the PC (get obstacle data from RPI).
-    obstacle_data = [[105, 75, 180], [135, 25, 0], [195, 95, 180], [175, 185, -90], [75, 125, 90], [15, 185, -90]]
+    obstacle_data = [[105, 75, 180, 0], [135, 25, 0, 1], [195, 95, 180, 2], [175, 185, -90, 3], [75, 125, 90, 4], [15, 185, -90, 5]]
     client.send_message(obstacle_data)  
     client.close()
     print("Done!\n")
