@@ -10,7 +10,6 @@ if __name__ == "__main__":
     obstacles_from_sample_arena_blackboard = [
         [15, 185, -90, 0],
         [65, 125, 90, 1],
-        [105, 75, 0, 2],
         [155, 165, 180, 3],
         [195, 95, 180, 4],
         [135, 25, 0, 5],
@@ -21,8 +20,8 @@ if __name__ == "__main__":
     # wk_simulator_w_obstacles(obstacles_random)
     # wk_simulator_w_obstacles(obstacles_from_sample_arena_blackboard)
 
-    wk_simulator_w_obstacles(obstacles_from_rules_for_task_wk89_word)
-    # wk_real_run(True)
+    # wk_simulator_w_obstacles(obstacles_from_rules_for_task_wk89_word)
+    wk_real_run(False)
 
 """
     1. from simulator_mgr
