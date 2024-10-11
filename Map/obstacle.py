@@ -11,7 +11,7 @@ class Obstacle:
         # Check if the coordinates are multiples of 10 with offset 5. If they are not, then they are invalid
         # obstacle coordinates.
         # This is from the assumption that all obstacles are placed centered in each grid.
-        # if (x - 5) % 10 != 0 or (y - 5) % 10 != 0:
+        # if x  % 10 != 0 or y % 10 != 0:
         #     raise AssertionError("Obstacle center coordinates must be multiples of 10 with offset 5!")
 
         # Translate given coordinates to be in PyGame coordinates.

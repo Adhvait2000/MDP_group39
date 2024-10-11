@@ -88,11 +88,11 @@ class ModifiedAStar:
         cost = dict()
 
         # check what the goal node is
-        goalNode = self.grid.get_coordinate(*self.end.xy()).copy()
+        goalNode = self.grid.get_coordinate(*self.end.xy()).copy() # take note of the copy
         goalNode.pos.direction = self.end.direction # set the required direction
 
         # add starting node set into the frontier
-        start_node: Node = self.grid.get_coordinate(*self.start.xy()).copy()
+        start_node: Node = self.grid.get_coordinate(*self.start.xy()).copy() # take note of the copy
         start_node.direction = self.start.direction # make the node know which direction the robot is facing
 
         offset = 0
