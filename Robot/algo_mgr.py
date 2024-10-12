@@ -44,7 +44,8 @@ class Brain:
         
         print("Found a simple hamiltonian path:")
         for ob in simple:
-            print(f"\t{ob}")
+            print(f"\t{ob}", ob.index)
+            print()
         return simple
 
     def compress_paths(self):
@@ -88,6 +89,7 @@ class Brain:
                 print("\tPath found.")
                 curr = res
                 self.commands.append(ScanCommand(ROBOT_TIME, obstacle.index))
+                
 
         self.compress_paths()
         print("-" * 40)
