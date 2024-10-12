@@ -99,11 +99,11 @@ class StraightCommand(Command):
 
         descaled_distance = int(self.dist // SCALING_FACTOR)
         if descaled_distance < 0:
-            # backward command
-            return f"SB{abs(descaled_distance):03}"
+            # backward commannd
+            return f"SB{(abs(descaled_distance)):03}"
         
         # else return forward command
-        return f"SF{abs(descaled_distance):03}"
+        return f"SF{(abs(descaled_distance)):03}"
 
 class TurnCommand(Command):
     def __init__(self, angle, rev):
@@ -126,7 +126,7 @@ class TurnCommand(Command):
             return
         
         self.tick()
-        angle = self.angle / self.totalTicks
+        angle = self.angle/ self.totalTicks
         robot.turn(angle, self.rev)
 
     def applyPos(self, currPos: Position):

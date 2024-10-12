@@ -15,7 +15,7 @@ class Obstacle:
             raise AssertionError("Obstacle center coordinates must be multiples of 10!")
 
         # Translate given coordinates to be in PyGame coordinates.
-        self.pos = Position((x+5) * SCALING_FACTOR, (y+5) * SCALING_FACTOR, direction)
+        self.pos = Position((x) * SCALING_FACTOR, (y) * SCALING_FACTOR, direction)
         # Arrow to draw at the target coordinate.
         self.target_image = pygame.transform.scale(pygame.image.load("Assets/target-arrow.png"),
                                                    (50, 50))
