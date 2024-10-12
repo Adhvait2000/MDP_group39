@@ -11,11 +11,11 @@ class Obstacle:
         # Check if the coordinates are multiples of 10 with offset 5. If they are not, then they are invalid
         # obstacle coordinates.
         # This is from the assumption that all obstacles are placed centered in each grid.
-        # if x  % 10 != 0 or y % 10 != 0:
-        #     raise AssertionError("Obstacle center coordinates must be multiples of 10 with offset 5!")
+        if x  % 10 != 0 or y % 10 != 0:
+            raise AssertionError("Obstacle center coordinates must be multiples of 10!")
 
         # Translate given coordinates to be in PyGame coordinates.
-        self.pos = Position(x * SCALING_FACTOR, y * SCALING_FACTOR, direction)
+        self.pos = Position((x+5) * SCALING_FACTOR, (y+5) * SCALING_FACTOR, direction)
         # Arrow to draw at the target coordinate.
         self.target_image = pygame.transform.scale(pygame.image.load("Assets/target-arrow.png"),
                                                    (50, 50))
