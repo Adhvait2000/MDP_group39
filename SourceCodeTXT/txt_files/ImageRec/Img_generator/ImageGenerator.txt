@@ -1,0 +1,101 @@
+import os
+import random
+from PIL import Image
+
+# Print the current working directory
+print("Current working directory before change:", os.getcwd())
+
+# Change the current working directory to the directory of the notebook
+# This works for Jupyter Notebooks running in VS Code
+notebook_path = os.path.abspath("gen.ipynb")
+notebook_dir = os.path.dirname(notebook_path)
+os.chdir(notebook_dir)
+
+# Verify the change
+print("Current working directory after change:", os.getcwd())
+# Define the folders
+background_folder = './backgrounds'
+character_folder = './text_transparent_background'
+output_folder = './text_random_background'
+
+# Create output folder if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
+
+# List all files in the background and character folders
+background_files = [f for f in os.listdir(background_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+character_files = [f for f in os.listdir(character_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+# Loop through each character image
+for character_file in character_files:
+    character_path = os.path.join(character_folder, character_file)
+    character_img = Image.open(character_path).convert("RGBA")
+    
+    # Randomly select 5 background images
+    selected_backgrounds = random.sample(background_files, 5)
+    
+    for i, background_file in enumerate(selected_backgrounds):
+        background_path = os.path.join(background_folder, background_file)
+        background_img = Image.open(background_path).convert("RGBA")
+        
+        # Resize background image to match character image dimensions
+        background_img_resized = background_img.resize(character_img.size, Image.Resampling.LANCZOS)
+        
+        # Paste the character onto the background
+        combined_img = Image.alpha_composite(background_img_resized, character_img)
+        
+        # Convert to RGB mode before saving as JPEG
+        combined_img_rgb = combined_img.convert("RGB")
+        
+        # Save the resulting image
+        output_path = os.path.join(output_folder, f"{os.path.splitext(character_file)[0]}_on_{i}_{background_file}")
+        combined_img_rgb.save(output_path, "JPEG")
+
+print("Images generated successfully.")
+# Define the folder containing the images and the output folder
+image_folder = './text_random_background'
+output_folder = './A4'
+os.makedirs(output_folder, exist_ok=True)
+
+# A4 size in pixels at 300 DPI
+A4_WIDTH, A4_HEIGHT = 2480, 3508
+IMAGE_SIZE = 709  # 6x6 cm in pixels at 300 DPI
+
+# Get all images in the folder
+image_files = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+# Function to create a new A4 image
+def create_new_a4():
+    return Image.new("RGB", (A4_WIDTH, A4_HEIGHT), "white")
+
+# Initialize variables
+a4_img = create_new_a4()
+x_offset, y_offset = 0, 0
+page_number = 1
+
+# Loop through each image file
+for img_file in image_files:
+    img = Image.open(img_file).convert("RGB")
+    img_resized = img.resize((IMAGE_SIZE, IMAGE_SIZE), Image.Resampling.LANCZOS)
+    
+    # Check if the image fits in the current row
+    if x_offset + IMAGE_SIZE > A4_WIDTH:
+        x_offset = 0
+        y_offset += IMAGE_SIZE
+    
+    # Check if the image fits in the current column
+    if y_offset + IMAGE_SIZE > A4_HEIGHT:
+        # Save the current A4 image and create a new one
+        a4_img.save(os.path.join(output_folder, f'a4_page_{page_number}.jpg'), "JPEG")
+        page_number += 1
+        a4_img = create_new_a4()
+        x_offset, y_offset = 0, 0
+    
+    # Paste the resized image onto the A4 image
+    a4_img.paste(img_resized, (x_offset, y_offset))
+    x_offset += IMAGE_SIZE
+
+# Save the last A4 image if it contains any images
+if x_offset != 0 or y_offset != 0:
+    a4_img.save(os.path.join(output_folder, f'a4_page_{page_number}.jpg'), "JPEG")
+
+print("All images have been placed onto A4 folder successfully.")
